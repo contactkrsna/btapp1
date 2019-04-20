@@ -6,26 +6,40 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  // Declare this variable
+  int selectedRadioTile;
+  // Declare this variable
+  int selectedRadio;
+  @override
+  void initState() {
+    super.initState();
+    selectedRadio = 0;
+    selectedRadioTile = 0;
+  }
+
+  setSelectedRadioTile(int val) {
+    setState(() {
+      selectedRadioTile = val;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         //resizeToAvoidBottomPadding: false,
-        body:
-         SingleChildScrollView(
-                    child: Column(
-
-            crossAxisAlignment: CrossAxisAlignment.start, 
-            children: <Widget>[
+        body: SingleChildScrollView(
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
             Container(
-             
               child: Stack(
                 children: <Widget>[
                   Container(
                     padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
                     child: Text(
                       'Signup',
-                      style:
-                          TextStyle(fontSize: 80.0, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 80.0, fontWeight: FontWeight.bold),
                     ),
                   ),
                   // Container(
@@ -103,16 +117,56 @@ class _SignupPageState extends State<SignupPage> {
                               borderSide: BorderSide(color: Colors.green))),
                     ),
                     SizedBox(height: 10.0),
-                    TextField(
-                      decoration: InputDecoration(
-                          labelText: 'GENDER',
-                          labelStyle: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.green))),
+                    // TextField(
+                    //   decoration: InputDecoration(
+                    //       labelText: 'GENDER',
+                    //       labelStyle: TextStyle(
+                    //           fontFamily: 'Montserrat',
+                    //           fontWeight: FontWeight.bold,
+                    //           color: Colors.grey),
+                    //       focusedBorder: UnderlineInputBorder(
+                    //           borderSide: BorderSide(color: Colors.green))),
+                    // ),
+
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'GENDER',
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                        ),
+                      ),
                     ),
+                    // This goes to the build method
+                    RadioListTile(
+                      value: 1,
+                      groupValue: selectedRadioTile,
+                      title: Text("Mail"),
+                      //subtitle: Text("Radio 1 Subtitle"),
+                      onChanged: (val) {
+                        print("Radio Tile pressed $val");
+                        setSelectedRadioTile(val);
+                      },
+                      activeColor: Colors.red,
+                      //selected: true,
+                    ),
+                    RadioListTile(
+                      value: 2,
+                      groupValue: selectedRadioTile,
+                      title: Text("Female"),
+                      //subtitle: Text("Radio 2 Subtitle"),
+                      onChanged: (val) {
+                        print("Radio Tile pressed $val");
+                        setSelectedRadioTile(val);
+                      },
+                      activeColor: Colors.red,
+
+                      //selected: false,
+                    ),
+
+                    //new Divider(height: 5.0, color: Colors.black),
                     SizedBox(height: 10.0),
                     TextField(
                       decoration: InputDecoration(
@@ -172,22 +226,18 @@ class _SignupPageState extends State<SignupPage> {
                           onTap: () {
                             Navigator.of(context).pop();
                           },
-                          child: 
-                          
-                              Center(
-                                child: Text('Go Back',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'Montserrat')),
-                              ),
-                          
-                          
+                          child: Center(
+                            child: Text('Go Back',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Montserrat')),
+                          ),
                         ),
                       ),
                     ),
                   ],
                 )),
-             SizedBox(height: 25.0),
+            SizedBox(height: 25.0),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.center,
             //   children: <Widget>[
@@ -208,7 +258,7 @@ class _SignupPageState extends State<SignupPage> {
             //     )
             //   ],
             // )
-        ]),
-         ));
+          ]),
+    ));
   }
 }
